@@ -63,5 +63,42 @@ namespace DAL.Concrete
                 return userInfo;
             }
         }
+        public UserInfo InsertUser(UserInfo userInfo)
+        {
+            using(SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "INSERT INTO user_info (user_login, hashpassword, first_name, last_name, password_keyword, gender, user_addres, email, phone_number) OUTPUT inserted.user_id " +
+                    "VALUES (@userLogin, @hashPassword, @firstName, @lastName, @passwordKeyword, @Gender, @userAddres, @Email, @phoneNumber)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("userLogin", userInfo.UserLogin);
+                cmd.Parameters.AddWithValue("hashPassword", userInfo.HashPassword);
+                cmd.Parameters.AddWithValue("firstName", userInfo.FirstName);
+                cmd.Parameters.AddWithValue("lastName", userInfo.LastName);
+                cmd.Parameters.AddWithValue("passwordKeyword", userInfo.PasswordKeyword);
+                cmd.Parameters.AddWithValue("Gender", userInfo.Gender);
+                cmd.Parameters.AddWithValue("userAddres", userInfo.UserAddress);
+                cmd.Parameters.AddWithValue("Email", userInfo.Email);
+                cmd.Parameters.AddWithValue("phoneNumber", userInfo.PhoneNumber);
+
+                _connection.Open();
+                userInfo.UserId = Convert.ToInt32(cmd.ExecuteScalar());
+                _connection.Close();
+                return userInfo;
+            }
+        }
+
+        public void DeleteUser(int userID)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "DELETE FROM user_info WHERE user__id = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("id", userID);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+        }
     }
 }

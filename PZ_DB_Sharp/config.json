@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "TradingCompany": "Server=DESKTOP-R46L4I7;Database=TradingCompany;Integrated Security=True;TrustServerCertificate=True"
+  }
+}
