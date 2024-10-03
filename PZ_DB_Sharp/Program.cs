@@ -97,7 +97,8 @@ void AddNewUser()
         };
         
         UserInfo newUser = userInfoDal.InsertUser(user);
-        Console.WriteLine($"{newUser.UserId}| {newUser.UserLogin}\n" +
+        AddNewBankCard(newUser.UserId);
+        Console.WriteLine($"Added\n{newUser.UserId}| {newUser.UserLogin}\n" +
             $"\t{newUser.FirstName} {newUser.LastName}\n" +
             $"\t{newUser.UserAddress}, \t{newUser.Gender}, \t{newUser.Email}\n\t{newUser.PhoneNumber}");
     }
@@ -106,9 +107,34 @@ void AddNewUser()
         Console.WriteLine("Wrong value");
     }
 }
-void AddNewBankCard()
+void AddNewBankCard(int ownerID)
 {
-    
+    try
+    {
+        Console.WriteLine("Number of card: ");
+        string number = Console.ReadLine();
+        Console.WriteLine("PIN: ");
+        int pin = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("CVV: ");
+        int cvv = Convert.ToInt32(Console.ReadLine());
+
+        var bankCard = new BankCard
+        {
+            Number = number,
+            PIN = pin,
+            CVV = cvv,
+            OwnerId = ownerID
+        };
+
+        BankCard newBankCard = bankCardDal.InsertBankCard(bankCard);
+        Console.WriteLine($"Added\n{newBankCard.BankCardId}| {newBankCard.Number}" +
+            $"\t{newBankCard.PIN},  {newBankCard.CVV}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Wrong value");
+    }
+
 }
 void UserList()
 {

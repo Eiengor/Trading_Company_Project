@@ -5,6 +5,8 @@ namespace DAL.Interface
     {
         List<BankCard> GetAll();
         BankCard GetById(int id);
+        BankCard InsertBankCard(BankCard bankCard);
+        void DeleteBankCard(int id);
     }
 }
  

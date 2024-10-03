@@ -38,7 +38,6 @@ namespace DAL.Concrete
                 return bankCards;
             }
         }
-
         public BankCard GetById(int id)
         {
             using (SqlCommand cmd = _connection.CreateCommand())
@@ -66,6 +65,36 @@ namespace DAL.Concrete
                 }
                 return bankCard;
             }
+        }
+        public BankCard InsertBankCard(BankCard bankCard)
+        {
+            using(SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "INSERT INTO bank_card (owner_id, number, cvv, pin) " +
+                    "OUTPUT inserted.bank_card_id VALUES(@ownerId, @Number, @CVV, @PIN)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("owner_id", bankCard.OwnerId);
+                cmd.Parameters.AddWithValue("Number", bankCard.Number);
+                cmd.Parameters.AddWithValue("CVV", bankCard.CVV);
+                cmd.Parameters.AddWithValue("PIN", bankCard.PIN);
+                _connection.Open();
+                bankCard.BankCardId = Convert.ToInt32(cmd.ExecuteScalar());
+                _connection.Close();
+                return bankCard;
+            }
+        }
+        public void DeleteBankCard(int bankCardID)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "DELETE FROM bank_card WHERE bank_card_id = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("id", bankCardID);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            } 
         }
     }
 }
