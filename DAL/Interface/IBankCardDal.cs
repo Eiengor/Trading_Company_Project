@@ -7,6 +7,7 @@ namespace DAL.Interface
         BankCard GetById(int id);
         BankCard InsertBankCard(BankCard bankCard);
         void DeleteBankCard(int id);
+        void UpdateBankCard(int id, string bankCardProperty, string propertyValue);
     }
 }
  

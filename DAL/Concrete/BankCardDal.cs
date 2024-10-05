@@ -96,5 +96,19 @@ namespace DAL.Concrete
                 _connection.Close();
             } 
         }
+        public void UpdateBankCard(int bankCardID, string bankCardProperty, string propertyValue)
+        {
+            using(SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "UPDATE bank_card SET @property = @value WHERE bank_card_id = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("property", bankCardProperty);
+                cmd.Parameters.AddWithValue("value", propertyValue);
+                cmd.Parameters.AddWithValue("id", bankCardID);
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+        }
     }
 }

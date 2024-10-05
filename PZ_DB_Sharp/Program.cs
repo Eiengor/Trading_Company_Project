@@ -21,6 +21,10 @@ while (true)
         "2. Add a new bank card.\n" +
         "3. Show users' list.\n" +
         "4. Show bank cards' list.\n" +
+        "5. Show user by id.\n" +
+        "6. Show bank card by id.\n" +
+        "7. Delete user by id.\n" +
+        "8. Delete bank card by id.\n" +
         "0. Exit.");
         string option = Console.ReadLine();
 
@@ -31,7 +35,9 @@ while (true)
                 continue;
 
             case "2":
-                AddNewBankCard();
+                Console.WriteLine("Write owner ID: ");
+                int ownerID = Convert.ToInt32(Console.ReadLine());
+                AddNewBankCard(ownerID);
                 continue;
 
             case "3":
@@ -50,6 +56,13 @@ while (true)
                 ShowBankCardById();
                 continue;
 
+            case "7":
+                DeleteUserById();
+                continue;
+
+            case "8":
+                DeleteBankCardById();
+                continue;
             case "0":
                 Console.WriteLine("Good bye! Have a nice day!\n");
                 break;
@@ -167,4 +180,144 @@ void ShowBankCardById()
     int bankCardID = Convert.ToInt32( Console.ReadLine() );
     var bankCard = bankCardDal.GetById(bankCardID);
     Console.WriteLine($"{bankCard.BankCardId}|  {bankCard.Number}");
+}
+void DeleteUserById()
+{
+    Console.WriteLine("Write user ID to delete: ");
+    int userID = Convert.ToInt32( Console.ReadLine() );
+    userInfoDal.DeleteUser(userID);
+    Console.WriteLine("User deleted");
+}
+void DeleteBankCardById()
+{
+    Console.WriteLine("Write bank card ID to delete: ");
+    int bankCardID = Convert.ToInt32(Console.ReadLine());
+    bankCardDal.DeleteBankCard(bankCardID);
+    Console.WriteLine("Bank card deleted");
+}
+void UpdateUserById()
+{
+    Console.WriteLine("Write user ID to edit: ");
+    int userId = Convert.ToInt32( Console.ReadLine() ) ;
+    Console.WriteLine("Pick property to edit (only one): \n" +
+     "1. Login\n" +
+     "2. Password\n" +
+     "3. Password Keyword\n" +
+     "4. First Name\n" +
+     "5. Last Name\n" +
+     "6. Gender\n" +
+     "7. Address\n" +
+     "8. Email\n" +
+     "9. Phone Number\n" +
+     "0. Exit\n" +
+     "Option: ");
+
+    int choice = Convert.ToInt32(Console.ReadLine());
+
+    switch (choice)
+    {
+        case 1:
+            Console.WriteLine("Enter new Login:");
+            string newLogin = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "user_login", newLogin);
+            break;
+        
+        case 2:
+            Console.WriteLine("Enter new Password:");
+            string newPassword = Hashing.HashPassword(Console.ReadLine());
+            userInfoDal.UpdateUser(userId, "hashpassword", newPassword);
+            break;
+       
+        case 3:
+            Console.WriteLine("Enter new Password Keyword:");
+            string newPasswordKeyword = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "password_keyword", newPasswordKeyword);
+            break;
+        case 4:
+            Console.WriteLine("Enter new First Name:");
+            string newFirstName = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "first_name", newFirstName);
+            break;
+        case 5:
+            Console.WriteLine("Enter new Last Name:");
+            string newLastName = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "last_name", newLastName);
+            break;
+        case 6:
+            Console.WriteLine("Enter new Gender(F/M):");
+            string newGender = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "gender", newGender);
+            break;
+        case 7:
+            Console.WriteLine("Enter new Address:");
+            string newAddress = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "user_address", newAddress);
+            break;
+        case 8:
+            Console.WriteLine("Enter new Email:");
+            string newEmail = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "email", newEmail);
+            break;
+        case 9:
+            Console.WriteLine("Enter new Phone Number:");
+            string newPhoneNumber = Console.ReadLine();
+            userInfoDal.UpdateUser(userId, "phone_number", newPhoneNumber);
+            break;
+        case 0:
+            break;
+        default:
+            Console.WriteLine("Invalid choice. Please try again.");
+            break;
+    }
+
+
+}
+void UpdateBankCardById()
+{
+    Console.WriteLine("Write bank card ID to edit: ");
+    int bankCardId = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("Pick property to edit (only one): \n" +
+    "1. Number\n" +
+    "2. CVV\n" +
+    "3. PIN\n" +
+    "4. Owner ID\n" +
+    "0. Exit\n" +
+    "Option: ");
+
+    int choice = Convert.ToInt32(Console.ReadLine());
+
+    switch (choice)
+    {
+        case 1:
+            Console.WriteLine("Enter new Card Number:");
+            string newNumber = Console.ReadLine();
+            bankCardDal.UpdateBankCard(bankCardId, "number", newNumber);
+            break;
+
+        case 2:
+            Console.WriteLine("Enter new CVV:");
+            string newCVV = Console.ReadLine();
+            bankCardDal.UpdateBankCard(bankCardId, "cvv", newCVV);
+            break;
+
+        case 3:
+            Console.WriteLine("Enter new PIN:");
+            string newPIN = Console.ReadLine();
+            bankCardDal.UpdateBankCard(bankCardId, "pin", newPIN);
+            break;
+
+        case 4:
+            Console.WriteLine("Enter new Owner ID:");
+            string newOwnerId = Console.ReadLine();
+            bankCardDal.UpdateBankCard(bankCardId, "owner_id", newOwnerId);
+            break;
+        
+        case 0:
+            break;
+        
+        default:
+            Console.WriteLine("Invalid choice. Please try again.");
+            break;
+    }
+
 }

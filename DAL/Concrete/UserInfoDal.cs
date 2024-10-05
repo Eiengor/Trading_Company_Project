@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace DAL.Concrete
 {
-    public class UserInfoDal
+    public class UserInfoDal : IUserInfoDal
     {
         private readonly SqlConnection _connection;
         public UserInfoDal(string connectionString)
@@ -86,7 +86,6 @@ namespace DAL.Concrete
                 return userInfo;
             }
         }
-
         public void DeleteUser(int userID)
         {
             using (SqlCommand cmd = _connection.CreateCommand())
@@ -95,6 +94,20 @@ namespace DAL.Concrete
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("id", userID);
 
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+        }
+        public void UpdateUser(int userID, string userProperty, string propertyValue)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "UPDATE user_info SET @property = @value WHERE user__id = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("property", userProperty);
+                cmd.Parameters.AddWithValue("value",  propertyValue);
+                cmd.Parameters.AddWithValue("id", userID);
                 _connection.Open();
                 cmd.ExecuteNonQuery();
                 _connection.Close();
