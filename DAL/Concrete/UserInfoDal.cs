@@ -67,8 +67,8 @@ namespace DAL.Concrete
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "INSERT INTO user_info (user_login, hashpassword, first_name, last_name, password_keyword, gender, user_addres, email, phone_number) OUTPUT inserted.user_id " +
-                    "VALUES (@userLogin, @hashPassword, @firstName, @lastName, @passwordKeyword, @Gender, @userAddres, @Email, @phoneNumber)";
+                cmd.CommandText = "INSERT INTO user_info (user_login, hashpassword, first_name, last_name, password_keyword, gender, user_address, email, phone_number) OUTPUT inserted.user__id " +
+                    "VALUES (@userLogin, @hashPassword, @firstName, @lastName, @passwordKeyword, @Gender, @userAddress, @Email, @phoneNumber)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("userLogin", userInfo.UserLogin);
                 cmd.Parameters.AddWithValue("hashPassword", userInfo.HashPassword);
@@ -76,7 +76,7 @@ namespace DAL.Concrete
                 cmd.Parameters.AddWithValue("lastName", userInfo.LastName);
                 cmd.Parameters.AddWithValue("passwordKeyword", userInfo.PasswordKeyword);
                 cmd.Parameters.AddWithValue("Gender", userInfo.Gender);
-                cmd.Parameters.AddWithValue("userAddres", userInfo.UserAddress);
+                cmd.Parameters.AddWithValue("userAddress", userInfo.UserAddress);
                 cmd.Parameters.AddWithValue("Email", userInfo.Email);
                 cmd.Parameters.AddWithValue("phoneNumber", userInfo.PhoneNumber);
 
@@ -103,9 +103,8 @@ namespace DAL.Concrete
         {
             using (SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "UPDATE user_info SET @property = @value WHERE user__id = @id";
+                cmd.CommandText = $"UPDATE user_info SET {userProperty} = @value WHERE user__id = @id";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("property", userProperty);
                 cmd.Parameters.AddWithValue("value",  propertyValue);
                 cmd.Parameters.AddWithValue("id", userID);
                 _connection.Open();

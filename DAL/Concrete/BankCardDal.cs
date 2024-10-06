@@ -1,11 +1,6 @@
 ﻿using DAL.Interface;
 using DTO;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Concrete
 {
@@ -71,9 +66,9 @@ namespace DAL.Concrete
             using(SqlCommand cmd = _connection.CreateCommand())
             {
                 cmd.CommandText = "INSERT INTO bank_card (owner_id, number, cvv, pin) " +
-                    "OUTPUT inserted.bank_card_id VALUES(@ownerId, @Number, @CVV, @PIN)";
+                    "OUTPUT inserted.bank_card_id VALUES (@ownerId, @Number, @CVV, @PIN)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("owner_id", bankCard.OwnerId);
+                cmd.Parameters.AddWithValue("ownerId", bankCard.OwnerId);
                 cmd.Parameters.AddWithValue("Number", bankCard.Number);
                 cmd.Parameters.AddWithValue("CVV", bankCard.CVV);
                 cmd.Parameters.AddWithValue("PIN", bankCard.PIN);
@@ -100,9 +95,8 @@ namespace DAL.Concrete
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "UPDATE bank_card SET @property = @value WHERE bank_card_id = @id";
+                cmd.CommandText = $"UPDATE bank_card SET {bankCardProperty} = @value WHERE bank_card_id = @id";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("property", bankCardProperty);
                 cmd.Parameters.AddWithValue("value", propertyValue);
                 cmd.Parameters.AddWithValue("id", bankCardID);
                 _connection.Open();
