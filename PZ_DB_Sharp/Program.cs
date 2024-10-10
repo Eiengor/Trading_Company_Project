@@ -36,9 +36,10 @@ public class Program
             "13. Show product by id.\n" +
             "14. Update product by id.\n" +
             "15. Delete product by id.\n" +
-            "0. Exit.");
+            "0. Exit.\n\n" +
+            "Option: ");
             string option = Console.ReadLine();
-
+            Console.WriteLine("\n");
             switch (option)
             {
                 case "1":
@@ -98,9 +99,11 @@ public class Program
                     DeleteProductById();
                     continue;
                 case "0":
-                    Console.WriteLine("Good bye! Have a nice day!\n");
-                    break;
-                    return 0;
+                    {
+                        Console.WriteLine("Good bye! Have a nice day!\n");
+                        break;
+                    }
+                    
 
                 default:
                     Console.WriteLine("Invalid option, please try again.");
