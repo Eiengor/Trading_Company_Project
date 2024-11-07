@@ -112,5 +112,35 @@ namespace DAL.Concrete
                 _connection.Close();
             }
         }
+        public UserInfo GetByUserLogin(string userLogin)
+        {
+            using (SqlCommand cmd = _connection.CreateCommand())
+            {
+                cmd.CommandText = "SELECT user__id, user_login, first_name, last_name, hashpassword FROM user_info WHERE user_login = @UserLogin";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("UserLogin", userLogin.ToString());
+                _connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                UserInfo? userInfo = null;
+                if (reader.Read())
+                {
+                    userInfo = new UserInfo
+                    {
+                        UserId = Convert.ToInt32(reader["user__id"]),
+                        UserLogin = reader["user_login"].ToString(),
+                        FirstName = reader["first_name"].ToString(),
+                        LastName = reader["last_name"].ToString(),
+                        HashPassword = reader["hashpassword"].ToString()
+                    };
+                }
+                _connection.Close();
+                if (userInfo == null)
+                {
+                    throw new NullReferenceException("Wrong User ID");
+                }
+                return userInfo;
+            }
+        }
     }
 }

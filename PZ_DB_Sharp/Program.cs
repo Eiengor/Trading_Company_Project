@@ -103,7 +103,7 @@ public class Program
                         Console.WriteLine("Good bye! Have a nice day!\n");
                         break;
                     }
-                    
+
 
                 default:
                     Console.WriteLine("Invalid option, please try again.");

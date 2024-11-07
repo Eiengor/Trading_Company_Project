@@ -1,0 +1,76 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        xmlns:viewModel="clr-namespace:WpfApp.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        Width="1200"
+        Height="700">
+    <Window.DataContext>
+        <viewModel:MainWindowModel/>
+    </Window.DataContext>
+    <Border Background="#F6F1F1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="19*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="47*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0"
+                    Grid.Row="1"
+                    Background="#AFD3E2"/>
+            <Border Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Background="#19A7CE">
+                <Label Content="Trading Company"
+                       HorizontalAlignment="Left"
+                       Width="250"
+                       FontFamily="Segoe UI Variable Text Semibold"
+                       FontSize="28" VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="67" VerticalContentAlignment="Center" Foreground="#FF002739">
+                    <Label.Effect>
+                        <DropShadowEffect/>
+                    </Label.Effect>
+                </Label>
+
+            </Border>
+            <RadioButton Content="Log in"
+                         Height="55"
+                         Foreground="Black"
+                         FontSize="20"
+                         Style="{StaticResource MenuRadioButtonTheme}"
+                         Command = "{Binding LogInViewCommand}"
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         Margin="670,12,148,10"/>
+            <RadioButton Content="Registration"
+                Height="55"
+                Foreground="Black"
+                FontSize="20"
+                Style="{StaticResource MenuRadioButtonTheme}"
+                Command = "{Binding RegistrationViewCommand}"
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="808,12,10,10"/>
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Products"
+                             Height="50"
+                             Foreground="#FAF7F0"
+                             FontSize="20"
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             Command = "{Binding ProductsViewCommand}"/>
+            </StackPanel>
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
+        </Grid>
+    </Border>
+</Window>
