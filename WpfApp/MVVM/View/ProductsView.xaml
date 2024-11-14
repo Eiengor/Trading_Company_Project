@@ -4,9 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp.MVVM.View"
+             xmlns:viewModel="clr-namespace:WpfApp.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.DataContext>
+        <viewModel:ProductsViewModel/>
+    </UserControl.DataContext>
+
+    <Border Background="#F6F1F1">
+        <Grid>
+            <DataGrid ItemsSource="{Binding Products}"
+                      CanUserAddRows="False"
+                      CanUserResizeRows="True"                  
+                      AutoGenerateColumns="False"
+                      Margin="10,51,10,0" FontSize="16"
+                      Background="#F6F1F1"
+                      BorderBrush="#F6F1F1"
+                      OpacityMask="#F6F1F1"
+                      Height="184" VerticalAlignment="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Product name"
+                                        Binding="{Binding Path = Title}"/>
+                    <DataGridTextColumn Header="Price"
+                                        Binding="{Binding Path=Price}"/>
+                    <DataGridTextColumn Header="Category"
+                                        Binding="{Binding Path=CategoryId}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="Product list" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="106" FontSize="16" FontWeight="Bold"/>
+
+        </Grid>
+    </Border>
 </UserControl>

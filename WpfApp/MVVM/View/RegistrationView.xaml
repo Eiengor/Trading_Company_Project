@@ -3,10 +3,142 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:WpfApp.MVVM.ViewModel"
              xmlns:local="clr-namespace:WpfApp.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <UserControl.DataContext>
+        <viewModel:RegistrationViewModel/>
+    </UserControl.DataContext>
+    <Border Background="#F6F1F1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="User login" 
+                Margin="10,10,708,392" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="10,49,506,0"
+                x:Name = "UserLoginBox"
+                Text="{Binding UserLogin, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="First name" 
+                Margin="10,95,708,307" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="10,134,506,0"
+                x:Name = "FirstNameBox"
+                Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Last name" 
+                Margin="10,184,708,218" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="10,223,506,0"
+                x:Name = "LastNameBox"
+                Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Password" 
+                Margin="10,270,708,132" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="10,309,506,0"
+                x:Name = "PasswordBox"
+                Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Password keyword" 
+                Margin="10,355,708,47" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="10,398,506,0"
+                x:Name = "PasswordKeywordBox"
+                Text="{Binding PasswordKeyWord, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Address" 
+                Margin="409,10,309,392" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="409,49,107,0"
+                x:Name = "AddressBox"
+                Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Gender" 
+                Margin="409,95,309,307" 
+                FontSize="18">
+            </Label>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Email" 
+                Margin="409,184,309,218" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="409,223,107,0"
+                x:Name = "EmailBox"
+                Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Phone number" 
+                Margin="409,270,309,132" 
+                FontSize="18">
+            </Label>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                Height="41"
+                VerticalAlignment="Top"
+                Margin="409,307,108,0"
+                x:Name = "PhoneNumberBox"
+                Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
+                TextWrapping="Wrap" MaxWidth="380"/>
+            <Button Content="Registrate!"
+                    HorizontalAlignment="Left"
+                    Margin="409,398,0,0"
+                    VerticalAlignment="Top"
+                    Height="41" Width="358"
+                    FontSize="18"
+                    BorderBrush="#FF00B4FF"
+                    Background="#FFAFD3E2"
+                    Command="{Binding RegistrateCommand}"/>
+            <Label Grid.Row="0" Grid.Column="0"
+                Content="Check your data&#xD;&#xA;before clicking this button!" 
+                Margin="409,356,309,46">
+            </Label>
+            <ComboBox HorizontalAlignment="Left" Margin="409,137,0,0"
+                      VerticalAlignment="Top"
+                      Width="359"
+                      Height="17"
+                      ItemsSource ="{Binding GendersList}"/>
+
+        </Grid>
+
+    </Border>
 </UserControl>

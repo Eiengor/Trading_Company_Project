@@ -13,7 +13,7 @@ namespace WpfApp.MVVM.ViewModel
     public class LogInViewModel : INotifyPropertyChanged
     {
         private DBConnect dbConnect = new DBConnect();
-        private UserInfo _currentUser;
+        public UserInfo _currentUser;
 
         private UserInfoDal _userDAL;
         public RelayCommand LogInCommand => new RelayCommand(execute => LogInUser(), canExecute => UserLogin != null);

@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for RegistrationView.xaml
+    /// Interaction logic for ProfileView.xaml
     /// </summary>
-    public partial class RegistrationView : UserControl
+    public partial class ProfileView : UserControl
     {
-        public RegistrationView()
+        public ProfileView()
         {
             InitializeComponent();
         }
-
     }
 }

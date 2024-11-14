@@ -38,7 +38,7 @@ namespace DAL.Concrete
         {
             using(SqlCommand cmd = _connection.CreateCommand())
             {
-                cmd.CommandText = "SELECT user__id, user_login, first_name, last_name FROM user_info WHERE user__id = @userId";
+                cmd.CommandText = "SELECT user__id, user_login, first_name, last_name, gender, user_address, email, phone_number FROM user_info WHERE user__id = @userId";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("userId", id);
                 _connection.Open();
@@ -52,7 +52,11 @@ namespace DAL.Concrete
                         UserId = Convert.ToInt32(reader["user__id"]),
                         UserLogin = reader["user_login"].ToString(),
                         FirstName = reader["first_name"].ToString(),
-                        LastName = reader["last_name"].ToString()
+                        LastName = reader["last_name"].ToString(),
+                        Email = reader["email"].ToString(),
+                        UserAddress = reader["user_address"].ToString(),
+                        PhoneNumber = reader["phone_number"].ToString(),
+                        Gender = reader["gender"].ToString()
                     };
                 }
                 _connection.Close();

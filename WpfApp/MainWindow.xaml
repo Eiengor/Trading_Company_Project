@@ -66,6 +66,12 @@
                              FontSize="20"
                              Style="{StaticResource MenuRadioButtonTheme}"
                              Command = "{Binding ProductsViewCommand}"/>
+                <RadioButton Content="Profile"
+                             Height="50"
+                             Foreground="#FAF7F0"
+                             FontSize="20"
+                             Style="{StaticResource MenuRadioButtonTheme}"
+                             Command = "{Binding ProfileViewCommand}"/>
             </StackPanel>
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
